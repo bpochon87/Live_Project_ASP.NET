@@ -9,7 +9,7 @@
   <li><a href="#intro">Description</a></li>
   <li><a href="#entities">Building Entities</a></li>
   <li><a href="#photostorage">Converting a Picture for Storage</a></li>
-  <li><a href="#skills">In Finality: Skills</li>
+  <li><a href="#skills">In Finality: Skills Sharpened</li>
 </ul>
 
 
@@ -119,7 +119,7 @@ namespace TheatreCMS3.Areas.Prod.Models
         }
 ```
 
-<h2 id="skills">In Finality: Skills</h2>
+<h2 id="skills">In Finality: Skills Sharpened</h2>
 <p>This project allowed me to further hone several skills. They include:</p>
 <ul>
   <li>Coding <strong>C#</strong></li>
