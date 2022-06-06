@@ -82,9 +82,9 @@ namespace TheatreCMS3.Areas.Prod.Models
 <h2 id="photostorage">Converting a Picture for Storage</h2>
 <p>Within the CastMember entity was a byte array (Byte[]) that was to be associated with a user-uploaded photo in the database (dB). Any uploaded image had to be converted to a Byte[] before being able to be stored in the dB. A method in the controller accomplished this.</p>
 <br>
-<p>An interesting side note is that the `HttpPostedFile` class used to accept the user-uploaded photo from the HTML file input tag has a default-maximum size of 4MB. This is able to be overwritten using the `MaxRequestLength` property or by setting the `maxRequestLength` attribute of the httpRuntime Element element within the Machine.config or Web.config file.</p>
+<p>An interesting side note is that the HttpPostedFile class used to accept the user-uploaded photo from the HTML file input tag has a default-maximum size of 4MB. This is able to be overwritten using the MaxRequestLength property or by setting the maxRequestLength attribute of the httpRuntime Element element within the Machine.config or Web.config file.</p>
 
-```
+```c#
 def trail_api(request):
     # API code from https://rapidapi.com/trailapi/api/trailapi/
     url = "https://trailapi-trailapi.p.rapidapi.com/trails/explore/"
