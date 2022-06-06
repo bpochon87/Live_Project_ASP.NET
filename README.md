@@ -1,15 +1,14 @@
 # Live_Project
 
-<h2 align="center">Vertigo Theatre website</h2>
+<h2 align="center">Vertigo Theatre Website</h2>
 
-![homepage.png](images/homepageVertigo.png)
+![homepageVertigo.png](images/homepageVertigo.png)
 
 <h2>Index</h2>
 <ul>
   <li><a href="#intro">Description</a></li>
   <li><a href="#entities">Building Entities</a></li>
   <li><a href="#photostorage">Converting a Picture for Storage</a></li>
-  <li><a href="#ux"></a></li>
   <li><a href="#skills">In Finality: Skills</li>
 </ul>
 
@@ -76,7 +75,7 @@ namespace TheatreCMS3.Areas.Prod.Models
 }
 ```
 
-![scrapedData.png](images/createCastMember.png)
+![createCastMember.png](images/createCastMember.png)
 
 
 <h2 id="photostorage">Converting a Picture for Storage</h2>
@@ -85,45 +84,40 @@ namespace TheatreCMS3.Areas.Prod.Models
 <p>An interesting side note is that the HttpPostedFile class used to accept the user-uploaded photo from the HTML file input tag has a default-maximum size of 4MB. This is able to be overwritten using the MaxRequestLength property or by setting the maxRequestLength attribute of the httpRuntime Element element within the Machine.config or Web.config file.</p>
 
 ```c#
-def trail_api(request):
-    # API code from https://rapidapi.com/trailapi/api/trailapi/
-    url = "https://trailapi-trailapi.p.rapidapi.com/trails/explore/"
+        public byte[] ConvertImage(HttpPostedFileBase image)
+        {
+            // Initializing empty byte array
+            byte[] imageByteArray;
 
-    # Latitude and longitude required. 'per_page' and 'radius' optional.
-    parameters = {"lat": "39", "lon": "-106", "per_page": "300", "radius": "100"}
-    headers = {
-        "X-RapidAPI-Host": "trailapi-trailapi.p.rapidapi.com",
-        "X-RapidAPI-Key": "e3b28ce81fmshbcd98af11e9812dp1487c5jsnaf6f45c8d994"
-    }
-    response = requests.request("GET", url, headers=headers, params=parameters)
-    json_response = response.json()
-
-    # Empty lists to populate with data we want to pull from the API.
-    trail_name_list = []
-    trail_desc_list = []
-    trail_city_list = []
-    trail_difficulty_list = []
-
-    # Populating all lists except 'trail_list'.
-    for item in json_response['data']:
-        trail_name_list.append(item['name'])
-        trail_desc_list.append(item['description'])
-        trail_city_list.append(item['city'])
-        trail_difficulty_list.append(item['difficulty'])
-
-    trail_list = zip(trail_name_list, trail_desc_list, trail_city_list, trail_difficulty_list)
-
-    context = {'trail_list': trail_list}
-    return render(request, 'MTB_Trails/trail_api.html', context)
+            // BinaryReader provides methods that simplify reading primitive data types from a stream.
+            // In our case, the stream will be the client uploaded file 'image' from the 'Create' view.
+            using (BinaryReader br = new BinaryReader(image.InputStream))
+            {
+                imageByteArray = br.ReadBytes(image.ContentLength);
+            }
+            return imageByteArray;
+        }
 ```
 
-https://user-images.githubusercontent.com/83652607/163685974-1b9bfa39-7bef-42be-8d77-abe1d7a1a5c4.mp4
+<p>With the above method complete, we're able to assign it to our entity (CastMember) 'Photo' property:</p>
 
+```c#
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "CastMemberId,Name,YearJoined,MainRole,Bio,CurrentMember,Character,CastYearLeft,DebutYear,Photo")] CastMember castMember, HttpPostedFileBase image)
+        {
+            if (ModelState.IsValid)
+            {
+                // imageByteArray is being assigned to the castMember.Photo property here.
+                castMember.Photo = ConvertImage(image);
+                db.CastMembers.Add(castMember);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-<h2 id="ux">Video Showcasing UI and UX</h2>
-<p>I was quite pleased to see how the website came together: the melded colors, the slick and straightforward interface. Please enjoy a quick video of the functionality and pages created within the Django framework.</p>
-
-https://user-images.githubusercontent.com/83652607/163687482-6487c094-b23f-4123-ab4c-523008ec2681.mp4
+            return View(castMember);
+        }
+```
 
 <h2 id="skills">In Finality: Skills</h2>
 <p>This project allowed me to further hone several skills. They include:</p>
