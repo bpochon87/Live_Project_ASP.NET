@@ -1,4 +1,4 @@
-# Live_Project
+# ASP.NET Live Project
 
 <h2 align="center">Vertigo Theatre Website</h2>
 
