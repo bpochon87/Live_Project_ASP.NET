@@ -7,8 +7,8 @@
 <h2>Index</h2>
 <ul>
   <li><a href="#intro">Description</a></li>
-  <li><a href="#bs">Building Entities</a></li>
-  <li><a href="#api">Converting a Picture for Storage</a></li>
+  <li><a href="#entities">Building Entities</a></li>
+  <li><a href="#photostorage">Converting a Picture for Storage</a></li>
   <li><a href="#ux"></a></li>
   <li><a href="#skills">In Finality: Skills</li>
 </ul>
@@ -29,10 +29,10 @@
   <li>Razor syntax</li>
 </ul>
 
-<h2 id="bs">Building Entities</h2>
+<h2 id="entities">Building Entities</h2>
 <p>Successful websites require simple CRUD functionality. One story had me creating and styling the 'Create' portion. Check out the code and screenshot.</p>
 
-```
+```c#
 namespace TheatreCMS3.Areas.Prod.Models
 {
     public class CastMember
@@ -76,11 +76,13 @@ namespace TheatreCMS3.Areas.Prod.Models
 }
 ```
 
-![scrapedData.png](images/scrapedData.png)
+![scrapedData.png](images/createCastMember.png)
 
 
-<h2 id="api">Sourcing Data via an API</h2>
-<p>Another story had me locating an API that would be suitable for my particular use and implementing it as a source of data. I brought in all data provided and then selected only certain parameters (name of trail, description, difficulty [if specified]) that I wanted to pass to my webpage. Check out the code and video.</p>
+<h2 id="photostorage">Converting a Picture for Storage</h2>
+<p>Within the CastMember entity was a byte array (Byte[]) that was to be associated with a user-uploaded photo in the database (dB). Any uploaded image had to be converted to a Byte[] before being able to be stored in the dB. A method in the controller accomplished this.</p>
+<br>
+<p>An interesting side note is that the `HttpPostedFile` class used to accept the user-uploaded photo from the HTML file input tag has a default-maximum size of 4MB. This is able to be overwritten using the `MaxRequestLength` property or by setting the `maxRequestLength` attribute of the httpRuntime Element element within the Machine.config or Web.config file.</p>
 
 ```
 def trail_api(request):
