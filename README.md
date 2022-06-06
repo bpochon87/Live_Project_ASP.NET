@@ -2,7 +2,7 @@
 
 <h2 align="center">Vertigo Theatre website</h2>
 
-![homepage.png](images/homepage.png)
+![homepage.png](images/homepageVertigo.png)
 
 <h2>Index</h2>
 <ul>
