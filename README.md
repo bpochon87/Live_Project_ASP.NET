@@ -15,7 +15,7 @@
 
 
 <h2 id="intro">Description</h2>
-<p>As part of our curriculum, we were tasked with a two-week sprint where we had to implement certain functionality within the Vertigo Theatre . This was done with other students as my teammates and instructors as project managers. Working according to the Agile methodology and within the scrum framework, I completed several stories where I implemented the ability to CRUD a cast member.</p>
+<p>My team was tasked with a two-week sprint where we had to implement certain functionality within the Vertigo Theatre. Working according to the Agile methodology and within the scrum framework, I completed several stories where I implemented the ability to CRUD a cast member.</p>
 
 <p><strong>Technologies used by me were:</strong></p>
 <ul>
